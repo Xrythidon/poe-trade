@@ -1,27 +1,20 @@
 import {SearchActionTypes} from "./search.types";
 
 const INITIAL_STATE = {
-  currentSearch: null,
+  currentSearch: [],
   fetching: false
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SearchActionTypes.SET_SEARCH:
-        return {
-            ...state,
-            currentSearch: action.payload
-        }
     case SearchActionTypes.REQUESTING_DATA:
         return {
-
+            ...state, fetching: true
         }
     case SearchActionTypes.RECEIVED_DATA:
         return {
-            
+            ...state, fetching: false, currentSearch: action.payload
         }
-
-
 
     default:
       return state;

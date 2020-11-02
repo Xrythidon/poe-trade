@@ -1,21 +1,20 @@
 import API from "../../search-api";
 
-import { SearchActionTypes } from "./search.types";
+import { ItemActionTypes } from "./item.types";
 
 export const requestingData = () => {
-  return { type: SearchActionTypes.REQUESTING_DATA };
+  return { type: ItemActionTypes.REQUESTING_DATA };
 };
 export const receivedData = (data) => {
-  return { type: SearchActionTypes.RECEIVED_DATA, payload: data };
+  return { type: ItemActionTypes.RECEIVED_DATA, payload: data };
 };
 
 // ASYNC
-export const grabAPI = () => (dispatch, getState) => {
-  // Dispatch request action here
+export const fetchItems = (id) => (dispatch, getState) => {
   dispatch(requestingData());
 
   // CALL THE BACKEND SERVICE HERE
-  API.getSearch()
+  API.getItem(id)
     .then((data) => {
       dispatch(receivedData(data));
     })

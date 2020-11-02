@@ -1,4 +1,4 @@
-export const SearchActionTypes = {
+export const ItemActionTypes = {
     REQUESTING_DATA: "REQUESTING_DATA",
     RECEIVED_DATA: "RECEIVED_DATA"
 }
