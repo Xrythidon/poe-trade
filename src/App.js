@@ -4,21 +4,26 @@ import { grabAPI } from "./redux/search/search.actions";
 import { fetchItem } from "./redux/item/item.actions";
 import "./App.scss";
 
-import Item from "./components/item/item.component";
-import Item2 from "./components/item/item2.component"
+import Item2 from "./components/item/item2.component";
 
 function App() {
   const search = useSelector((state) => state.search); // redux name in rootReducer
-  const item = useSelector((state) => state.item); // redux name in rootReducer
   const dispatch = useDispatch();
+
+  const [array, setArray] = useState([]);
 
   useEffect(() => {
     console.log(search.currentSearch);
   }, [search]);
 
+
   useEffect(() => {
-    console.log(item);
-  }, [item]);
+    if (search.loaded) {
+      console.log("loaded data now ready to render");
+
+      setArray(search.currentSearch.slice(0,5))
+    }
+  }, [search.loaded]);
 
   const idRef = useRef();
 
@@ -30,7 +35,12 @@ function App() {
   return (
     <div className="App">
       <h1>PoE Info</h1>
-      <p>{search.fetching.toString()}</p>
+      <p className={search.fetching ? "green" : "red"}>
+        {search.fetching.toString()}
+      </p>
+      <p className={search.loaded ? "green" : "red"}>
+        {search.loaded.toString()}
+      </p>
       <button onClick={() => dispatch(grabAPI())}>Test Me</button>
 
       <form onSubmit={handleSubmit}>
@@ -39,17 +49,11 @@ function App() {
         <input type="submit" value="Submit" key="key2" />
       </form>
 
-        {
-          item.loaded &&
-          <Item item={item.items} />
-        }
-
-       
-          <Item2 itemId={"650528de7b7c254022a03562fbc057b06c12e117200083978a6706746d8fab77"} />
-
-
-
-
+      { search.loaded &&
+        array.map((searchElement) => (
+          <Item2 itemId={searchElement}/>
+        ))
+      }
 
     </div>
   );
