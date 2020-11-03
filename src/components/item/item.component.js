@@ -3,12 +3,11 @@ import React, {useState, useEffect} from "react";
 
 /*
 
-Do the get request here. So you can process every single item individually without going through a redux state change.
+Do the get request here. So you can process every single item individually without going through a redux state
 
 */
-
-
 const Item = ({ item }) => {
+    
     console.log(item);
 
     let {

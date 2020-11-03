@@ -5,6 +5,7 @@ import { fetchItem } from "./redux/item/item.actions";
 import "./App.scss";
 
 import Item from "./components/item/item.component";
+import Item2 from "./components/item/item2.component"
 
 function App() {
   const search = useSelector((state) => state.search); // redux name in rootReducer
@@ -42,6 +43,12 @@ function App() {
           item.loaded &&
           <Item item={item.items} />
         }
+
+       
+          <Item2 itemId={"650528de7b7c254022a03562fbc057b06c12e117200083978a6706746d8fab77"} />
+
+
+
 
 
     </div>

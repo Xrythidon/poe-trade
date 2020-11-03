@@ -4,7 +4,7 @@ export default {
   getSearch() {
    return post("https://www.pathofexile.com/api/trade/search/Standard");
   },
-  getItem(id = "ca4bf4bbc0a2c229be0d3965861da957137291e93d3b7102a0e232f9473d1821") {
+  getItem(id = "f0e5eb2286b426aa2f9b05a6515f2d0ac87b513bceeb1328ef2f0a63a52ec362") {
     return get(`https://www.pathofexile.com/api/trade/fetch/${id}`)
 
   }
