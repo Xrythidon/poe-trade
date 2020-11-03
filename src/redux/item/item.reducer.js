@@ -2,7 +2,8 @@ import {ItemActionTypes} from "./item.types";
 
 const INITIAL_STATE = {
   items: [],
-  fetching: false
+  fetching: false,
+  loaded: false
 };
 
 const itemReducer = (state = INITIAL_STATE, action) => {
@@ -13,7 +14,7 @@ const itemReducer = (state = INITIAL_STATE, action) => {
         }
     case ItemActionTypes.RECEIVED_DATA:
         return {
-            ...state, fetching: false, items: action.payload
+            ...state, loaded: true, fetching: false, items: action.payload
         }
 
     default:

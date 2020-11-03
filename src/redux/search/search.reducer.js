@@ -2,7 +2,8 @@ import {SearchActionTypes} from "./search.types";
 
 const INITIAL_STATE = {
   currentSearch: [],
-  fetching: false
+  fetching: false,
+  loaded: false
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -13,7 +14,7 @@ const searchReducer = (state = INITIAL_STATE, action) => {
         }
     case SearchActionTypes.RECEIVED_DATA:
         return {
-            ...state, fetching: false, currentSearch: action.payload
+            ...state, loaded: true, fetching: false, currentSearch: action.payload
         }
 
     default:

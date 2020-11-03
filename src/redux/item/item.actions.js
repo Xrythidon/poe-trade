@@ -10,7 +10,7 @@ export const receivedData = (data) => {
 };
 
 // ASYNC
-export const fetchItems = (id) => (dispatch, getState) => {
+export const fetchItem = (id) => (dispatch, getState) => {
   dispatch(requestingData());
 
   // CALL THE BACKEND SERVICE HERE

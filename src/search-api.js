@@ -13,7 +13,7 @@ export default {
 async function get(getRequest){
   try {
     const response = await axios.get(getRequest)
-    return response
+    return response.data.result[0]
   } catch (err) {
     return err;
   }
