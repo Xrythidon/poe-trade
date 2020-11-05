@@ -10,14 +10,21 @@ export const receivedData = (data) => {
 };
 
 // ASYNC
-export const grabAPI = () => (dispatch, getState) => {
+export const grabAPI = (query) => (dispatch, getState) => {
   // Dispatch request action here
   dispatch(requestingData());
+  
+  const stateBefore = getState()
+  console.log("QUERY IS HERE, BEFORE", stateBefore)
 
   // CALL THE BACKEND SERVICE HERE
-  API.getSearch()
+
+
+  API.getSearch(query)
     .then((data) => {
       dispatch(receivedData(data));
+      const stateAfter = getState()
+      console.log("QUERY IS HERE, AFTER", stateAfter)
     })
     .catch((err) => {
       console.log(err);
@@ -25,3 +32,9 @@ export const grabAPI = () => (dispatch, getState) => {
 
   // Dispatch received data action here
 };
+// Update Query Object
+
+export const updateQuery = (query) => {
+  return { type: SearchActionTypes.UPDATE_QUERY, payload: query}
+
+}

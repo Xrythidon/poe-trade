@@ -4,7 +4,9 @@ import { grabAPI } from "./redux/search/search.actions";
 import { fetchItem } from "./redux/item/item.actions";
 import "./App.scss";
 
+
 import Item2 from "./components/item/item2.component";
+import Search from "./components/search/search.component";
 
 function App() {
   const search = useSelector((state) => state.search); // redux name in rootReducer
@@ -52,9 +54,11 @@ function App() {
       { search.loaded &&
         array.map((searchElement) => (
           <Item2 itemId={searchElement}/>
-        ))
+        )) 
       }
 
+
+      <Search/>
     </div>
   );
 }

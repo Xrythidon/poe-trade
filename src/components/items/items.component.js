@@ -1,26 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect} from "react";
+import { useSelector } from "react-redux";
 
-const Items = ({currentSearch}) => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+import Item2 from "../item/item2.component";
 
-export default Items
+const Items = () => {
+  const [array, setArray] = useState([]);
+  const search = useSelector((state) => state.search); // redux name in rootReducer  
 
 
-// trace
+  useEffect(() => {
 
-/*
+    if (search.loaded) {
+      console.log("loaded data now ready to render");
 
-App -> Items (Take in currentSearchResults:array)
+      setArray(search.currentSearch.slice(0, 5));
+    }
+  }, [search.loaded]);
 
--> Item (Take in Item from the currentSearchResults data)
-
-
-*/
-
-
-
+  return (
+    <div>
+      {search.loaded &&
+        array.map((searchElement) => <Item2 itemId={searchElement} />)}
+    </div>
+  );
+};
+export default Items;
