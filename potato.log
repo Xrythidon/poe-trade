@@ -1,0 +1,30 @@
+DevTools failed to load SourceMap: Could not load content for chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/injectGlobalHook.js.map: HTTP error: status code 404, net::ERR_UNKNOWN_URL_SCHEME
+DevTools failed to load SourceMap: Could not load content for chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/react_devtools_backend.js.map: HTTP error: status code 404, net::ERR_UNKNOWN_URL_SCHEME
+log.js:24 [HMR] Waiting for update signal from WDS...
+App.js:37 (186) ["Meginord's Girdle", "Gloomfang", "Ungil's Harmony", "Doedre's Damning", "Marylene's Fallacy", "Malachai's Artifice", "Andvarius", "Blackheart", "Perandus Signet", "Bated Breath", "Lori's Lantern", "Daresso's Salute", "Immortal Flesh", "Rashkaldor's Patience", "Thief's Torment", "Essence Worm", "Heartbound Loop", "Headhunter", "Precursor's Emblem", "Sibyl's Lament", "Ming's Heart", "Maligaro's Cruelty", "Tavukai", "Shaper's Seed", "Le Heup of All", "Stormfire", "Araku Tiki", "Darkness Enthroned", "The Anvil", "The Halcyon", "The Taming", "Ventor's Gamble", "Circle of Guilt", "Voll's Devotion", "String of Servitude", "Perandus Blazon", "Karui Charge", "Sacrificial Heart", "Timeclasp", "Dream Fragments", "Warped Timepiece", "Profane Proxy", "The Pandemonius", "Siegebreaker", "Leash of Oblation", "Karui Ward", "The Nomad", "Yoke of Suffering", "Tear of Purity", "Faminebind", "Mark of the Shaper", "Atziri's Foible", "Ngamahu Tiki", "Doryani's Invitation", "The Retch", "The Aylardex", "The Ignomon", "Stone of Lazhwar", "Kikazaru", "Death Rush", "Bisco's Collar", "Bloodboil", "Prismweave", "Pyre", "Belt of the Deceiver", "Wurm's Molt", "Retaliation Charm", "Circle of Anguish", "Circle of Regret", "The Ascetic", "Rigwald's Curse", "Badge of the Brotherhood", "Ascent From Flesh", "Aul's Uprising", "Carnage Heart", "Victario's Acuity", "Circle of Fear", "The Pariah", "Xoph's Blood", "Romira's Banquet", "The Flow Untethered", "Berek's Pass", "Sidhebreath", "Berek's Grip", "Ryslatha's Coil", "Praxis", "The Jinxed Juju", "Vivinsect", "Snakepit", "The Hungry Loop", "Mokou's Embrace", "Sunblast", "Astramentis", "Eye of Chayula", "Fury Valve", "Kaom's Way", "Circle of Nostalgia", "Willowgift", "Hyrri's Truth", "Kaom's Sign", …][0 … 99][100 … 185]length: 186__proto__: Array(0)
+DevTools failed to load SourceMap: Could not load content for chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/contentScript.js.map: HTTP error: status code 404, net::ERR_UNKNOWN_URL_SCHEME
+react_devtools_backend.js:2450 src\App.js
+  Line 1:38:  'Suspense' is defined but never used                                                                                     no-unused-vars
+  Line 4:10:  'fetchItem' is defined but never used                                                                                    no-unused-vars
+  Line 29:6:  React Hook useEffect has a missing dependency: 'search.currentSearch'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\components\item\item.component.js
+  Line 1:16:   'useState' is defined but never used                 no-unused-vars
+  Line 1:26:   'useEffect' is defined but never used                no-unused-vars
+  Line 17:13:  Destructuring assignment ilvl unnecessarily renamed  no-useless-rename
+
+src\components\item\item2.component.js
+  Line 34:5:   Unreachable code                                                                                                                                                                                                                           no-unreachable
+  Line 35:6:   React Hook useEffect has missing dependencies: 'fetched' and 'itemId'. Either include them or remove the dependency array. You can also do a functional update 'setFetched(f => ...)' if you only need 'fetched' in the 'setFetched' call  react-hooks/exhaustive-deps
+  Line 43:17:  Destructuring assignment ilvl unnecessarily renamed                                                                                                                                                                                        no-useless-rename
+  Line 67:6:   React Hook useEffect has a missing dependency: 'item'. Either include it or remove the dependency array                                                                                                                                    react-hooks/exhaustive-deps
+
+src\components\items\items.component.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'search.currentSearch'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\search-api.js
+  Line 3:1:  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+overrideMethod @ react_devtools_backend.js:2450
+printWarnings @ webpackHotDevClient.js:138
+handleWarnings @ webpackHotDevClient.js:143
+push../node_modules/react-dev-utils/webpackHotDevClient.js.connection.onmessage @ webpackHotDevClient.js:210

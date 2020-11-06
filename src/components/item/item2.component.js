@@ -12,16 +12,24 @@ const Item2 = ({ itemId }) => {
   const [fetched, setFetched] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
+
     API.getItem(itemId)
       .then((data) => {
-        setItem(data);
-        console.log("THIS IS THE DATA", data);
-        setFetched(!fetched);
+        if(mounted){
+          setItem(data);
+          console.log("THIS IS THE DATA", data);
+          setFetched(!fetched);
+
+        }
+
       })
       .catch((err) => {
         console.log(err);
         setFetched(false);
       });
+
+      return () => mounted = false;
 
     console.log("1");
   }, []);
