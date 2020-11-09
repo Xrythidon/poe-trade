@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 15px 0;
+
+}
+
+.page__item {
+    margin: 0 auto;
+}
+
+.page__link {
+    color: inherit;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+
+
+
+  .page__active {
+    background-color: black;
+    color: white;
+  }
+  
+  .pagination a:hover:not(.page__active) {background-color: #ddd;}

@@ -1,13 +1,9 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { grabAPI } from "./redux/search/search.actions";
-import { fetchItem } from "./redux/item/item.actions";
 import "./App.scss";
-
-import {accessories, armours} from "./AutoComplete.js"
-
-import Item2 from "./components/item/item2.component";
 import Search from "./components/search/search.component";
+import Items from "./components/items/items.component";
 
 function App() {
   const search = useSelector((state) => state.search); // redux name in rootReducer
@@ -42,11 +38,7 @@ function App() {
       <button onClick={() => dispatch(grabAPI())}>Test Me</button>
 
       <Search/>
-      { search.loaded &&
-        array.map((searchElement) => (
-          <Item2 key={searchElement} itemId={searchElement}/>
-        )) 
-      }
+      <Items/>
     </div>
   );
 }
