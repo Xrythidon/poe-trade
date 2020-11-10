@@ -1,9 +1,12 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { grabAPI } from "./redux/search/search.actions";
 import "./App.scss";
-import Search from "./components/search/search.component";
 import Items from "./components/items/items.component";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+
+// Pages
+import SearchPage from "./page_parts/search/search.page";
+import ResultsPage from "./page_parts/Results/results.page";
 
 function App() {
   const search = useSelector((state) => state.search); // redux name in rootReducer
@@ -15,30 +18,38 @@ function App() {
     //console.log(search.currentSearch);
   }, [search]);
 
+  const authenticate = () =>{
+     return new Promise(resolve => setTimeout(resolve, 2000)) // 2 seconds
+  }
 
   useEffect(() => {
     if (search.loaded) {
       console.log("loaded data now ready to render");
 
-      setArray(search.currentSearch.slice(0,5))
+      setArray(search.currentSearch.slice(0, 5));
     }
   }, [search.loaded]);
-
-
+  
+  useEffect(() => {
+    authenticate().then(() => {
+      const ele = document.getElementById("ipl-progress-indicator");
+      if (ele) {
+        // fade out
+        ele.classList.add("available");
+        setTimeout(() => {
+          // remove from DOM
+          ele.outerHTML = "";
+        }, 2000);
+      }
+    });
+  }, []);
 
   return (
     <div className="App">
-      <h1>PoE Info</h1>
-      <p className={search.fetching ? "green" : "red"}>
-        {search.fetching.toString()}
-      </p>
-      <p className={search.loaded ? "green" : "red"}>
-        {search.loaded.toString()}
-      </p>
-      <button onClick={() => dispatch(grabAPI())}>Test Me</button>
-
-      <Search/>
-      <Items/>
+      <ErrorBoundary>
+        <SearchPage />
+        <ResultsPage />
+      </ErrorBoundary>
     </div>
   );
 }

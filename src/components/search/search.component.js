@@ -4,11 +4,9 @@ import { updateQuery, grabAPI } from "../../redux/search/search.actions";
 
 import { stack, accessories, armours } from "../../AutoComplete";
 
-import AutoComplete from "../autocomplete/autoComplete.component";
-
 import "./search.component.scss";
 
-const Search = () => {
+const Search = ({ className }) => {
   /*
     Build Query Object
 
@@ -69,8 +67,7 @@ const Search = () => {
     if (e.keyCode === 13) {
       e.preventDefault();
     }
-
-  }
+  };
 
   // AUTOCOMPLETE Funcs
   const onChange = (e) => {
@@ -90,7 +87,7 @@ const Search = () => {
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
       setShowOptions(false);
-      setActiveOption(0)
+      setActiveOption(0);
       setName(suggestions[activeOption]);
     } else if (e.keyCode === 38) {
       if (activeOption === 0) {
@@ -108,9 +105,9 @@ const Search = () => {
 
   const preventEnter = (e) => {
     if (e.keyCode === 13) {
-      e.preventDefault()
+      e.preventDefault();
     }
-  }
+  };
 
   const searchItemsToComplete = (searchText) => {
     // Get matches to current text input
@@ -151,20 +148,27 @@ const Search = () => {
           if (index === activeOption) {
             className = "active";
           }
-          
+
           return (
-          <li key={item} className={className} onClick={onClick}>
-            {item}
-          </li>
-        )})}
+            <li key={item} className={className} onClick={onClick}>
+              {item}
+            </li>
+          );
+        })}
       </ul>
     );
   };
 
   return (
-    <div>
-      <form onKeyDown={onKeyPress} onSubmit={handleSubmit} className="AutoCompleteText">
+    <div className="search__input-bar">
+      <form
+        id="search-form"
+        onKeyDown={onKeyPress}
+        onSubmit={handleSubmit}
+        className="AutoCompleteText"
+      >
         <input
+          className="search__search-box"
           type="text"
           key="Potato"
           onChange={onChange}
@@ -174,7 +178,19 @@ const Search = () => {
           placeholder="Search Item Here"
         />
         {renderSuggestions()}
-        <input type="submit" value="Submit" />
+        {/*SubmitButton is in SearchPage */}
+        <div class="search__select-box">
+          <select class="search__select" name="leagues">
+            <option value="heist">Heist</option>
+            <option value="hardcoreHeist">Hardcore Heist</option>
+            <option value="standard">Standard</option>
+            <option value="hardcore">Hardcore</option>
+          </select>
+          <select class="search__select" name="online">
+            <option value="onlineOnly">Online Only</option>
+            <option value="any">Any</option>
+          </select>
+        </div>
       </form>
     </div>
   );

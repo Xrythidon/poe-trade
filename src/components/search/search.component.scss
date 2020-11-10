@@ -1,51 +1,77 @@
+@import "../../scss/variables";
+
+/* AutoComplete */
+
 .AutoCompleteText {
-    width: 60%;
-    margin: 0 auto;
-    border: 1px solid grey;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: rgba(0,0,0,.73);
-
-
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgba($primary-button-color, 0.73);
+  z-index: 1;
 }
 
 .AutoCompleteText input {
-    width: 100%;
-    border: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: rgba(0,0,0,.73);
-    padding: 10px 5px;
-    outline: none;
+  outline: none;
 }
 
 .AutoCompleteText ul {
-    list-style-type: none;
-    text-align: left;
-    border-top: 1px solid grey;
-    overflow-y: auto;
-    max-height: calc(50vh - 200px);
-
+  list-style-type: none;
+  text-align: left;
+  border-top: 1px solid grey;
+  background-color: $primary-button-bgcolor;
+  overflow-y: auto;
+  max-height: calc(50vh - 200px);
 }
 
 .AutoCompleteText ul::before {
-    content: "";
+  content: "";
 }
 
 .AutoCompleteText li {
-    padding: 10px 5px;
-    cursor: pointer;
+  padding: 10px 5px;
+  cursor: pointer;
 }
 
 .AutoCompleteText li:hover {
-    text-decoration: underline;
-    background-color: rgba(128,128,128,0.2);
+  text-decoration: underline;
+  background-color: rgba($primary-button-color, 0.5);
 }
 
 .active {
-    background-color: grey;
-    font-size: 1.1rem;
-    color: #f5dd03;
-
+  background-color: $primary-searchbtn-color;
+  font-size: 1.1rem;
+  color: #f5cc9e;
+  font-weight: 600;
 }
+
+/*
+ *  STYLE 6
+ */
+
+.AutoCompleteText ul::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #222222;
+}
+
+.AutoCompleteText ul::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+.AutoCompleteText ul::-webkit-scrollbar-thumb {
+  background-color: $primary-button-color;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  border-radius: 10px;
+}
+
+

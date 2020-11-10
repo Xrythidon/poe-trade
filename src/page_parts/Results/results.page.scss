@@ -1,0 +1,160 @@
+@import "../../scss/variables";
+
+@import "../../App.scss";
+
+
+
+/* Result */
+
+.results {
+    margin-top: 5vh;
+}
+
+.results__title {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+/* Result */
+
+.results {
+    margin-top: 5vh;
+}
+
+.results__title {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+
+.result {
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgba(10, 10, 10, 0.8);
+    background: linear-gradient(180deg, hsla(0, 0%, 0%, 0.01) 0%, hsla(11, 63%, 30%, 0.2) 30%);
+    border-bottom: 1px solid #333;
+    
+}
+
+@media (min-width: 900px) {
+    .result {
+        max-width: 60%;
+        margin: 2px auto;
+
+    }
+  }
+
+.result:nth-child(even){
+    background-color: rgba(0, 0, 0, 0.808);
+}
+
+
+.result__container {
+    display: flex;
+ 
+    justify-content: center;
+    margin: 15px 0;
+}
+
+/* Item */
+
+.icon__container {
+    max-width: 50%;
+    min-width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.icon__text-box {
+    display: flex;
+
+    align-items: center;
+}
+
+.icon__text {
+    font-size: 0.6rem;
+    font-weight: 800;
+
+}
+
+.icon__links {
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+
+.item__box {
+    font-size: 0.7rem;
+    max-width: 80%;
+    margin: auto 0;
+}
+
+@media (min-width: 900px) {
+    .item__box {
+        font-size: 0.9rem;
+        max-width: 80%;
+    }
+}
+
+.item__price-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.item__sale-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid black;
+    padding: 0px 5px;
+    margin-top: 10px;
+}
+
+.item__box,.item__explicits {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+
+
+}
+
+.item__name {
+    color: #af6025;
+}
+
+.item__corrupted {
+    color: red;
+}
+
+.item__explicits {
+
+
+    list-style-type: none;
+}
+
+.item__explicit {
+    text-align: left;
+}
+
+/* Item Status*/
+
+.status__online {
+    background-color: #309630;
+    border-color: #4dc64d;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 70%;
+    margin: 0 2px;
+    padding: .1em .1em .1em .6em;
+}
+

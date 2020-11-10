@@ -3,10 +3,14 @@
   src: url(./fonts/fontin-smallcaps-webfont.woff);
 }
 
+@import "scss/variables";
+
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 html {
@@ -14,7 +18,19 @@ html {
   font-size: 1rem;
 }
 
-
+body {
+  font-family: "Verdana";
+  font-weight: 300;
+  color: rgb(201, 201, 201);
+  background-attachment: fixed;
+  background-image: url(./images/bg1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
 
 .app {
   text-align: center;
@@ -28,5 +44,70 @@ html {
 .red {
   color: red;
   font-weight: 800;
+}
+
+
+/* Btn */
+
+
+/* Button */
+
+.btn {
+  border-radius: 0.12rem;
+  padding: .1em .1em .1em .1em;
+  border: 0.1rem solid rgba($primary-button-color, 0.308);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: rgba($primary-button-color,1);
+  background-color: #222;
+  font-weight: 300;
+  cursor: pointer;
+
+}
+
+.btn:hover {
+  color: $primary-button-bgcolor;
+  background-color: $primary-button-color;
+
+}
+
+
+.btn--large {
+
+  width: 100%;
+  max-width: 100%;
+  padding: 0.2rem 1.5rem;
+  margin-bottom: 5px;
+  margin-right: 5px;
+
+  
+}
+
+.btn--medium {
+  max-width: 50%;
+  margin: 0 auto;
+  min-width: 100px;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 5px;
+
+
+
+}
+.btn--medium:first-of-type {
+  margin-right: 5px
+
+}
+
+.btn--primary {
+  background-color: $primary-searchbtn-color;
+
+}
+
+.btn--primary:hover {
+  color: $primary-searchbtn-color;
+}
+
+.btn--secondary {
+
 }
 
