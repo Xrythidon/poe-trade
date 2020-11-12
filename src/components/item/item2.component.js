@@ -104,7 +104,7 @@ const Item2 = ({ itemId }) => {
             </div>
             <div className="item__status">
               <span className="status__online">Online</span>
-              <span className="status__name">IGN: {playerName}</span>
+              <span className="status__name">{" "}IGN: {playerName} {" "}</span>
               <button className="status__whisper btn"> Whisper</button>
             </div>
           </div>

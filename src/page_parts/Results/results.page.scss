@@ -114,7 +114,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid black;
+    border-top: 1px solid rgba(0, 0, 0, 0.61);
     padding: 0px 5px;
     margin-top: 10px;
 }
@@ -125,7 +125,10 @@
     justify-content: left;
     align-items: flex-start;
 
+}
 
+.item__box {
+    width: 100%;
 }
 
 .item__name {
@@ -148,8 +151,16 @@
 
 /* Item Status*/
 
+.item__sale-box {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
 .status__online {
     background-color: #309630;
+
     border-color: #4dc64d;
     border: 1px solid transparent;
     font-weight: bold;
@@ -158,3 +169,6 @@
     padding: .1em .1em .1em .6em;
 }
 
+.status__name {
+    width: 50%
+}

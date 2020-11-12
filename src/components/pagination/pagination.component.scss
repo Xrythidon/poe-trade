@@ -1,27 +1,32 @@
+@import "../../scss/variables";
+
 .pagination {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 15px 0;
+  color: $primary-button-color;
 
 }
 
 .page__item {
-    margin: 0 auto;
+  margin: 0 auto;
+  
 }
 
 .page__link {
-    color: inherit;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-  }
+  color: inherit;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 
+.page__active {
+  background-color: $primary-searchbtn-color;
+  color: $primary-button-color;
+}
 
-
-  .page__active {
-    background-color: black;
-    color: white;
-  }
-  
-  .pagination a:hover:not(.page__active) {background-color: #ddd;}
+.pagination span:hover:not(.page__active) {
+  cursor: pointer;
+  background-color: $primary-button-bgcolor;
+}
