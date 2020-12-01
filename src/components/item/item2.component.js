@@ -10,7 +10,6 @@ Do the get request here. So you can process every single item individually witho
 
 */
 
-const dummyObject = {};
 
 const Item2 = ({ itemId }) => {
   const [item, setItem] = useState({});
@@ -34,7 +33,6 @@ const Item2 = ({ itemId }) => {
 
     return () => (mounted = false);
 
-    console.log("1");
   }, []);
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const Item2 = ({ itemId }) => {
     if (fetched) {
       let {
         id, // rename
-        item: { icon: image, ilvl: ilvl, name: itemName },
+        item: { icon: image, ilvl, name: itemName },
         listing: {
           account: { name: accountName, lastCharacterName: playerName },
           price: { amount: cost, currency: currencyCost },
