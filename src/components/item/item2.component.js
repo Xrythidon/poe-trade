@@ -41,7 +41,7 @@ const Item2 = ({ itemId }) => {
     if (fetched) {
       let {
         id, // rename
-        item: { icon: image, ilvl, name: itemName },
+        item: { icon: image, ilvl: ilvl, name: itemName, explicitMods: explicitMods, corrupted: corrupted, implicitMods: implicitMods },
         listing: {
           account: { name: accountName, lastCharacterName: playerName },
           price: { amount: cost, currency: currencyCost },
@@ -59,6 +59,9 @@ const Item2 = ({ itemId }) => {
         playerName,
         cost,
         currencyCost,
+        explicitMods,
+        corrupted,
+        implicitMods
       });
 
       console.log(item);
@@ -66,7 +69,7 @@ const Item2 = ({ itemId }) => {
     }
   }, [fetched]);
 
-  const { image, itemName, cost, currencyCost, playerName } = item;
+  const { image, itemName, cost, currencyCost, playerName, ilvl, explicitMods, implicitMods, corrupted} = item;
   return fetched ? (
     <div className="result">
       <div className="result__container">
@@ -81,14 +84,13 @@ const Item2 = ({ itemId }) => {
 
         <div className="item__box">
           <h2 className="item__name">{itemName}</h2>
-          <p className="item__ilvl">Item Level: 75</p>
-          <p className="item__implicit">+1 to all levels</p>
-          <p className="item__corrupted">Corrupted</p>
+  <p className="item__ilvl">Item Level: {ilvl}</p>
+          {implicitMods && (  implicitMods.map((implicitMod) => <p className="item__implicit">{implicitMod}</p>))} {/*Put seperator here, add conditional for implicitMods exist */}
+          {corrupted && <p className="item__corrupted">Corrupted</p> }
           <ul className="item__explicits">
-            <li className="item__explicit">Test1</li>
-            <li className="item__explicit">Test2</li>
-            <li className="item__explicit">Test3</li>
-            <li className="item__explicit">Test4</li>
+            {
+              explicitMods && explicitMods.map((explicitMod) => <li className="item__explicit">{explicitMod}</li> )
+            }
           </ul>
           <div className="item__sale-box">
             <div className="item__price-box">

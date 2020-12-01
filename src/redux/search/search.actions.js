@@ -19,7 +19,6 @@ export const grabAPI = (query) => (dispatch, getState) => {
 
   // CALL THE BACKEND SERVICE HERE
 
-
   API.getSearch(query)
     .then((data) => {
       dispatch(receivedData(data));
