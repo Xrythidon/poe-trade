@@ -121,14 +121,6 @@ const Search = ({ className }) => {
     }
 
     setSuggestions(suggestions);
-    /*
-    let armourMatches = armours.sort().filter((item) => {
-      return item.match(regex);
-    });
-
-    console.log(accessoryMatches.slice(0, 5));
-    console.log(armourMatches.slice(0, 5));
-    */
   };
 
   const renderSuggestions = () => {

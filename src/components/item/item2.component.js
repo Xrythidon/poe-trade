@@ -9,6 +9,7 @@ import "./item.component.scss";
 const Item2 = ({ itemId }) => {
   const [item, setItem] = useState({});
   const [fetched, setFetched] = useState(null);
+  const [copySuccess, setCopySuccess] = useState("");
 
   useEffect(() => {
     let mounted = true;
@@ -62,6 +63,10 @@ const Item2 = ({ itemId }) => {
 
     }
   }, [fetched]);
+
+  const handleClipboard = (e) => {
+    
+  }
 
   const handleSockets = (socketsArray) => {
     let stringBuilder = "";
