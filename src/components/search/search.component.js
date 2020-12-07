@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateQuery, grabAPI } from "../../redux/search/search.actions";
 
-import { stack, accessories, armours } from "../../AutoComplete";
+import { stack, result } from "../../AutoComplete";
 
 import "./search.component.scss";
 
@@ -115,13 +115,40 @@ const Search = ({ className }) => {
     let suggestions = [];
     if (searchText.length > 0) {
       const regex = new RegExp(`^${searchText}`, "gi");
-      suggestions = stack.sort().filter((item) => {
-        return item.match(regex);
-      });
-    }
 
-    setSuggestions(suggestions);
+      // suggestions = stack.sort().filter((item) => {
+      //   return item.match(regex);
+      // });
+
+      result.forEach((type) => {
+        let entries = type["entries"].sort().filter((item) => {
+            return item.match(regex);
+          });
+          suggestions.push({
+            "label": type["label"],
+            "entries": entries
+          });
+
+        });
+      
+    }
+    console.log(suggestions);
+    //setSuggestions(suggestions);
   };
+
+  /*
+    const result = [
+  {
+    label: "Accessories",
+    entries: accessories,
+  },
+  {
+    label: "Armours",
+    entries: armours,
+  },
+];
+
+  */
 
   const renderSuggestions = () => {
     if (suggestions.length === 0) {
