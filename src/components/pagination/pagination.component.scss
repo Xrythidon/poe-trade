@@ -1,12 +1,35 @@
 @import "../../scss/variables";
 
+
+
+
+.pagination-nav {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
 .pagination {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(10px, 1fr));
   justify-content: center;
   list-style-type: none;
   margin: 15px 0;
   color: $primary-button-color;
+}
 
+@media (min-width: 900px) {
+  .pagination-nav {
+
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 15px 0;
+    color: $primary-button-color;
+  
+  }
 }
 
 .page__item {
@@ -21,6 +44,7 @@
   text-decoration: none;
 }
 
+
 .page__active {
   background-color: $primary-searchbtn-color;
   color: $primary-button-color;
@@ -30,3 +54,4 @@
   cursor: pointer;
   background-color: $primary-button-bgcolor;
 }
+

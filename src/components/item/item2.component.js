@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import API from "../../search-api";
 
 import chaosCurrency from "../../images/ChaosOrb.png";
+import seperator from "../../images/seperator-unique.png";
 import "./item.component.scss";
-
-/*
-
-Do the get request here. So you can process every single item individually without going through a redux state change.
-
-*/
 
 
 const Item2 = ({ itemId }) => {
@@ -41,7 +36,7 @@ const Item2 = ({ itemId }) => {
     if (fetched) {
       let {
         id, // rename
-        item: { icon: image, ilvl: ilvl, name: itemName, explicitMods: explicitMods, corrupted: corrupted, implicitMods: implicitMods },
+        item: { icon: image, ilvl: ilvl, name: itemName, explicitMods: explicitMods, corrupted: corrupted, implicitMods: implicitMods, sockets: sockets },
         listing: {
           account: { name: accountName, lastCharacterName: playerName },
           price: { amount: cost, currency: currencyCost },
@@ -61,15 +56,64 @@ const Item2 = ({ itemId }) => {
         currencyCost,
         explicitMods,
         corrupted,
-        implicitMods
+        implicitMods, 
+        sockets
       });
 
-      console.log(item);
-      console.log("2");
     }
   }, [fetched]);
 
-  const { image, itemName, cost, currencyCost, playerName, ilvl, explicitMods, implicitMods, corrupted} = item;
+  const handleSockets = (socketsArray) => {
+    let stringBuilder = "";
+
+    let groupOneString = "";
+    let groupTwoString = " ";
+
+    for(let i = 0; i < socketsArray.length; i++ ){
+      for(let j = i; j < socketsArray.length; j++ ){
+        if (socketsArray[j].group === i) { 
+
+          if (i === 0) { // group 0
+            groupOneString += socketsArray[j].sColour + "-";
+          }
+
+          if (i === 1) { 
+            groupTwoString += socketsArray[j].sColour + "-";
+          }
+
+
+
+        }
+
+      }
+    }
+
+    stringBuilder = groupOneString.substring(0, groupOneString.length - 1) + groupTwoString.substring(0, groupTwoString.length - 1);
+
+    return stringBuilder;
+
+  }
+
+  const parseSocketColour = (socketString) => {
+    let array = socketString.split("");
+
+    for (var i = 0; i < array.length; i++) {
+      if(socketString[i] === "R") {
+          array[i] = <span key={i} className="red">R</span>
+      }
+      if(socketString[i] === "G") {
+          array[i] = <span key={i} className="green">G</span>
+      }
+      if(socketString[i] === "B") {
+          array[i] = <span key={i} className="blue">B</span>
+
+    }
+  }
+  return array;
+}
+
+
+  const { image, itemName, cost, currencyCost, playerName, ilvl, explicitMods, implicitMods, corrupted, sockets} = item;
   return fetched ? (
     <div className="result">
       <div className="result__container">
@@ -77,19 +121,34 @@ const Item2 = ({ itemId }) => {
           <img className="icon" src={image} alt="" />
           <div className="icon__text-box">
             <p className="icon__text">
-              Sockets: <span className="icon__links">6w</span>
+              {
+                sockets && <span className="icon__links">{parseSocketColour(handleSockets(sockets))}</span>
+              }
             </p>
           </div>
         </div>
 
         <div className="item__box">
+          <div className="name__box">
           <h2 className="item__name">{itemName}</h2>
+          {corrupted && <p className="item__corrupted">(Corrupted)</p> }
+          </div>
   <p className="item__ilvl">Item Level: {ilvl}</p>
-          {implicitMods && (  implicitMods.map((implicitMod) => <p className="item__implicit">{implicitMod}</p>))} {/*Put seperator here, add conditional for implicitMods exist */}
-          {corrupted && <p className="item__corrupted">Corrupted</p> }
+          <ul className="item__implicits">
+          {/*Put seperator here, add conditional for implicitMods exist */}
+          {
+          implicitMods && <span className="seperator"></span>
+          }
+          {implicitMods && (  implicitMods.map((implicitMod) => <li key={implicitMod} className="item__implicit">{implicitMod}</li>))}
+          {
+          implicitMods && <span className="seperator"><img src={seperator} alt=""/></span>
+          } 
+          </ul>
+
+
           <ul className="item__explicits">
             {
-              explicitMods && explicitMods.map((explicitMod) => <li className="item__explicit">{explicitMod}</li> )
+              explicitMods && explicitMods.map((explicitMod) => <li key={explicitMod} className="item__explicit">{explicitMod}</li> )
             }
           </ul>
           <div className="item__sale-box">

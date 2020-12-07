@@ -22,7 +22,7 @@ const Items = () => {
         <Item2 itemId={searchElement} key={searchElement} />
       ));
     }
-    console.log(mapArray);
+
     return mapArray;
   };
 

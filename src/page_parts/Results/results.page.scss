@@ -103,6 +103,13 @@
     }
 }
 
+.name__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .item__price-box {
     display: flex;
     flex-direction: row;
@@ -133,22 +140,28 @@
 
 .item__name {
     color: #af6025;
+    padding-right: 5px;
 }
 
 .item__corrupted {
     color: red;
 }
 
-.item__explicits {
+.item__explicits, .item__implicits {
 
 
     list-style-type: none;
 }
 
-.item__explicit {
+.item__explicit, .item__implicit {
     text-align: left;
 }
 
+
+.seperator {
+    
+
+}
 /* Item Status*/
 
 .item__sale-box {
