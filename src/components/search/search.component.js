@@ -21,6 +21,8 @@ const Search = ({ className }) => {
 
   const [name, setName] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState(0);
   const [activeOption, setActiveOption] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -46,7 +48,7 @@ const Search = ({ className }) => {
           filters: [],
         },
       ],
-      name,
+      name: name,
     },
     sort: {
       price: "asc",
@@ -84,58 +86,6 @@ const Search = ({ className }) => {
     setName(e.currentTarget.innerText);
   };
 
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      setShowOptions(false);
-      setActiveOption(0);
-      setName(suggestions[activeOption]);
-    } else if (e.keyCode === 38) {
-      if (activeOption === 0) {
-        return;
-      }
-      setActiveOption(activeOption - 1);
-    } else if (e.keyCode === 40) {
-      if (activeOption === suggestions.length - 1) {
-        console.log(activeOption);
-        return;
-      }
-      setActiveOption(activeOption + 1);
-    }
-  };
-
-  const preventEnter = (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-    }
-  };
-
-  const searchItemsToComplete = (searchText) => {
-    // Get matches to current text input
-
-    let suggestions = [];
-    if (searchText.length > 0) {
-      const regex = new RegExp(`^${searchText}`, "gi");
-
-      // suggestions = stack.sort().filter((item) => {
-      //   return item.match(regex);
-      // });
-
-      result.forEach((type) => {
-        let entries = type["entries"].sort().filter((item) => {
-            return item.match(regex);
-          });
-          suggestions.push({
-            "label": type["label"],
-            "entries": entries
-          });
-
-        });
-      
-    }
-    console.log(suggestions);
-    //setSuggestions(suggestions);
-  };
-
   /*
     const result = [
   {
@@ -150,6 +100,113 @@ const Search = ({ className }) => {
 
   */
 
+  // instead of [0] <- we need to track the current category using state
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      setShowOptions(false);
+      setActiveOption(0);
+      console.log(categories);
+      console.log(suggestions[0]["entries"][activeOption]);
+      setName(suggestions[0]["entries"][activeOption]);
+    } else if (e.keyCode === 38) {
+      const lengthOfPreviousCategorySuggestions = suggestions[currentCategory - 1] ? suggestions[currentCategory - 1]["entries"].length : 0;
+
+
+      if (currentCategory <= 0){
+        if (activeOption <= 0) {
+          console.log("ROOF");
+          return;
+  
+        }
+      }
+      if ((activeOption < 0) && (currentCategory > 0)) {
+        console.log("triggering?")
+        setCurrentCategory(currentCategory - 1);
+        setActiveOption(lengthOfPreviousCategorySuggestions);
+
+        // setActiveOption as the length of the previous category
+      }
+     else{ setActiveOption(activeOption - 1);}
+
+      console.log(currentCategory, "currentCategory");
+      console.log(activeOption, "activeOption");
+
+    } else if (e.keyCode === 40) {
+      const lengthOfCurrentCategorySuggestions = suggestions[currentCategory]["entries"].length;
+      const lengthOfLastCategorySuggestions = suggestions[categories.length - 1]["entries"].length;
+      //console.log(suggestions[currentCategory]["entries"].length);
+  
+      /* FIX OVERFLOW DOWN KEY, */
+
+
+      if (activeOption === lengthOfCurrentCategorySuggestions) {
+
+        if(categories[currentCategory + 1] === undefined) {
+          console.log("next category doesn't exist")
+          return;
+        }
+
+        else {
+          setCurrentCategory(currentCategory + 1);
+          setActiveOption(0);
+        }
+
+        console.log(activeOption, "HIT THE NEXT CATEGORY");
+        return;
+      }
+      setActiveOption(activeOption + 1);
+
+              
+      console.log(currentCategory, "currentCategory");
+      console.log(activeOption, "activeOption");
+    }
+  };
+
+  /*
+            else if (activeOption === lengthOfLastCategorySuggestions) {
+          console.log(activeOption, "max category length HIT");
+          return;
+        }
+  */
+
+
+  const searchItemsToComplete = (searchText) => {
+    // Get matches to current text input
+
+    let suggestions = [];
+    let categories = [];
+    if (searchText.length > 0) {
+      const regex = new RegExp(`^${searchText}`, "gi");
+
+      // suggestions = stack.sort().filter((item) => {
+      //   return item.match(regex);
+      // });
+
+      result.forEach((type) => {
+        let entries = type["entries"].sort().filter((item) => {
+          return item.match(regex);
+        });
+        
+
+        suggestions.push({
+          label: type["label"],
+          entries: entries,
+        });
+
+        // Category handler
+        categories.push(type["label"]);
+        if(entries.length === 0){
+          categories.pop();
+        }
+
+      });
+    }
+    // console.log(suggestions);
+    // console.log(categories);
+    setCategories(categories);
+    setSuggestions(suggestions);
+  };
+
   const renderSuggestions = () => {
     if (suggestions.length === 0) {
       return null;
@@ -159,9 +216,22 @@ const Search = ({ className }) => {
       return null;
     }
 
-    return (
-      <ul>
-        {suggestions.map((item, index) => {
+    /*
+    const result = [
+  {
+    label: "Accessories",
+    entries: accessories,
+  },
+  {
+    label: "Armours",
+    entries: armours,
+  },
+];
+
+  */
+
+    /*
+  {suggestions.map((item, index) => {
           let className;
 
           if (index === activeOption) {
@@ -173,6 +243,28 @@ const Search = ({ className }) => {
               {item}
             </li>
           );
+        })}
+  */
+
+    return (
+      <ul>
+        {suggestions.map((suggestion) => {
+          return suggestion["entries"].map((item, index) => {
+            let className;
+
+            if (index === activeOption && suggestion["label"] === categories[currentCategory]) {
+              className = "active";
+            }
+
+            return (
+              <div key={item}>
+                {index === 0 ? <h1 key={suggestion["label"]} >{suggestion["label"]}</h1> : null}
+                <li key={item} className={className} onClick={onClick}>
+                  {item}
+                </li>
+              </div>
+            );
+          });
         })}
       </ul>
     );
