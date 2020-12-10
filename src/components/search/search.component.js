@@ -106,12 +106,12 @@ const Search = ({ className }) => {
       setShowOptions(false);
       setActiveOption(0);
       console.log(categories);
-      console.log(suggestions[0]["entries"][activeOption]);
-      setName(suggestions[0]["entries"][activeOption]);
+      console.log(suggestions[currentCategory]["entries"][activeOption]);
+      setName(suggestions[currentCategory]["entries"][activeOption]);
     } else if (e.keyCode === 38) {
       const lengthOfPreviousCategorySuggestions = suggestions[currentCategory - 1] ? suggestions[currentCategory - 1]["entries"].length : 0;
 
-
+      // ON KEY UP ENTER DOES NOT WORK
       if (currentCategory <= 0){
         if (activeOption <= 0) {
           console.log("ROOF");
@@ -119,10 +119,10 @@ const Search = ({ className }) => {
   
         }
       }
-      if ((activeOption < 0) && (currentCategory > 0)) {
+      if ((activeOption < 1) && (currentCategory > 0)) {
         console.log("triggering?")
         setCurrentCategory(currentCategory - 1);
-        setActiveOption(lengthOfPreviousCategorySuggestions);
+        setActiveOption(lengthOfPreviousCategorySuggestions - 1);
 
         // setActiveOption as the length of the previous category
       }
@@ -134,12 +134,21 @@ const Search = ({ className }) => {
     } else if (e.keyCode === 40) {
       const lengthOfCurrentCategorySuggestions = suggestions[currentCategory]["entries"].length;
       const lengthOfLastCategorySuggestions = suggestions[categories.length - 1]["entries"].length;
-      //console.log(suggestions[currentCategory]["entries"].length);
-  
+      const lastCategory = suggestions[categories.length - 1]["label"];
+      console.log(lastCategory, suggestions[currentCategory]["label"],  "lastcategory")
+
       /* FIX OVERFLOW DOWN KEY, */
 
+      if (suggestions[currentCategory]["label"] === lastCategory){
+        if (activeOption === lengthOfLastCategorySuggestions - 1) {
+          console.log("FLOOR");
+          return;
+  
+        }
+      }
 
-      if (activeOption === lengthOfCurrentCategorySuggestions) {
+
+      if (activeOption === lengthOfCurrentCategorySuggestions - 1) {
 
         if(categories[currentCategory + 1] === undefined) {
           console.log("next category doesn't exist")
@@ -150,8 +159,7 @@ const Search = ({ className }) => {
           setCurrentCategory(currentCategory + 1);
           setActiveOption(0);
         }
-
-        console.log(activeOption, "HIT THE NEXT CATEGORY");
+        console.log(activeOption, currentCategory, "HIT THE NEXT CATEGORY");
         return;
       }
       setActiveOption(activeOption + 1);

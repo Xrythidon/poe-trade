@@ -23,6 +23,10 @@
   max-height: calc(50vh - 200px);
 }
 
+.AutoCompleteText h1 {
+  background-color: rgba($color: black, $alpha: 0.4);
+}
+
 .AutoCompleteText ul::before {
   content: "";
 }
