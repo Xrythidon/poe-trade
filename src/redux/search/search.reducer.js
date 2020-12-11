@@ -33,6 +33,8 @@ const INITIAL_STATE = {
 
   fetching: false,
   loaded: false,
+  error: false,
+  errorMessage: ""
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -48,13 +50,21 @@ const searchReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loaded: true,
         fetching: false,
+        error: false,
+        errorMessage: "",
         currentSearch: action.payload,
       };
     case SearchActionTypes.UPDATE_QUERY:
       return {
         ...state,
         query: action.payload
-      }
+      };
+    case SearchActionTypes.RECEIVED_ERROR:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload,
+      };
     default:
       return state;
   }

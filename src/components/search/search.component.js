@@ -64,10 +64,16 @@ const Search = ({ className }) => {
     dispatch(grabAPI(searchQuery));
   };
 
+  const handleError = () => {
+
+  }
+
   // Prevent Enter to Dispatch
   const onKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
+    if (showOptions === true) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+      }
     }
   };
 
@@ -85,82 +91,68 @@ const Search = ({ className }) => {
     console.log(e.currentTarget.innerText);
     setName(e.currentTarget.innerText);
   };
-  
 
-  /*
-    const result = [
-  {
-    label: "Accessories",
-    entries: accessories,
-  },
-  {
-    label: "Armours",
-    entries: armours,
-  },
-];
 
-  */
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
       console.log(categories);
-      console.log(suggestions[currentCategory], currentCategory, "suggestions")
+      console.log(suggestions[currentCategory], currentCategory, "suggestions");
 
       console.log(suggestions[currentCategory]["entries"][activeOption]); // <--- Fix this? Undefined?
 
-      setShowOptions(false);
-      setActiveOption(0);
-      setCurrentCategory(0);
-
       setName(suggestions[currentCategory]["entries"][activeOption]);
-
+      setShowOptions(false);
     } else if (e.keyCode === 38) {
-      const lengthOfPreviousCategorySuggestions = suggestions[currentCategory - 1] ? suggestions[currentCategory - 1]["entries"].length : 0;
+      const lengthOfPreviousCategorySuggestions = suggestions[
+        currentCategory - 1
+      ]
+        ? suggestions[currentCategory - 1]["entries"].length
+        : 0;
 
       // ON KEY UP ENTER DOES NOT WORK
-      if (currentCategory <= 0){
+      if (currentCategory <= 0) {
         if (activeOption <= 0) {
           console.log("ROOF");
           return;
-  
         }
       }
-      if ((activeOption < 1) && (currentCategory > 0)) {
-        console.log("triggering?")
+      if (activeOption < 1 && currentCategory > 0) {
+        console.log("triggering?");
         setCurrentCategory(currentCategory - 1);
         setActiveOption(lengthOfPreviousCategorySuggestions - 1);
 
         // setActiveOption as the length of the previous category
+      } else {
+        setActiveOption(activeOption - 1);
       }
-     else{ setActiveOption(activeOption - 1);}
 
       console.log(currentCategory, "currentCategory");
       console.log(activeOption, "activeOption");
-
     } else if (e.keyCode === 40) {
-      const lengthOfCurrentCategorySuggestions = suggestions[currentCategory]["entries"].length;
-      const lengthOfLastCategorySuggestions = suggestions[categories.length - 1]["entries"].length;
+      const lengthOfCurrentCategorySuggestions =
+        suggestions[currentCategory]["entries"].length;
+      const lengthOfLastCategorySuggestions =
+        suggestions[categories.length - 1]["entries"].length;
       const lastCategory = suggestions[categories.length - 1]["label"];
-      console.log(lastCategory, suggestions[currentCategory]["label"],  "lastcategory")
+      console.log(
+        lastCategory,
+        suggestions[currentCategory]["label"],
+        "lastcategory"
+      );
 
-
-      if (suggestions[currentCategory]["label"] === lastCategory){
+      if (suggestions[currentCategory]["label"] === lastCategory) {
         if (activeOption === lengthOfLastCategorySuggestions - 1) {
           console.log("FLOOR");
           return;
-  
         }
       }
 
-
       if (activeOption === lengthOfCurrentCategorySuggestions - 1) {
-
-        if(categories[currentCategory + 1] === undefined) {
-          console.log("next category doesn't exist")
+        if (categories[currentCategory + 1] === undefined) {
+          console.log("next category doesn't exist");
           return;
-        }
-
-        else {
+        } else {
           setCurrentCategory(currentCategory + 1);
           setActiveOption(0);
         }
@@ -169,24 +161,11 @@ const Search = ({ className }) => {
       }
       setActiveOption(activeOption + 1);
 
-              
       console.log(currentCategory, "currentCategory");
       console.log(activeOption, "activeOption");
     }
   };
 
-  const preventEnter = (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-    }
-  };
-
-  /*
-            else if (activeOption === lengthOfLastCategorySuggestions) {
-          console.log(activeOption, "max category length HIT");
-          return;
-        }
-  */
 
 
   const searchItemsToComplete = (searchText) => {
@@ -205,26 +184,23 @@ const Search = ({ className }) => {
         let entries = type["entries"].sort().filter((item) => {
           return item.match(regex);
         });
-        
-
 
         suggestions.push({
           label: type["label"],
           entries: entries,
         });
-        if(entries.length === 0){
+        if (entries.length === 0) {
           suggestions.pop();
         }
 
         // Category handler
         categories.push(type["label"]);
-        if(entries.length === 0){
+        if (entries.length === 0) {
           categories.pop();
         }
-
       });
     }
-     console.log(suggestions);
+    console.log(suggestions);
     // console.log(categories);
 
     setCategories(categories);
@@ -240,49 +216,24 @@ const Search = ({ className }) => {
       return null;
     }
 
-    /*
-    const result = [
-  {
-    label: "Accessories",
-    entries: accessories,
-  },
-  {
-    label: "Armours",
-    entries: armours,
-  },
-];
-
-  */
-
-    /*
-  {suggestions.map((item, index) => {
-          let className;
-
-          if (index === activeOption) {
-            className = "active";
-          }
-
-          return (
-            <li key={item} className={className} onClick={onClick}>
-              {item}
-            </li>
-          );
-        })}
-  */
-
     return (
       <ul>
         {suggestions.map((suggestion) => {
           return suggestion["entries"].map((item, index) => {
             let className;
 
-            if (index === activeOption && suggestion["label"] === categories[currentCategory]) {
+            if (
+              index === activeOption &&
+              suggestion["label"] === categories[currentCategory]
+            ) {
               className = "active";
             }
 
             return (
               <div key={item}>
-                {index === 0 ? <h1 key={suggestion["label"]} >{suggestion["label"]}</h1> : null}
+                {index === 0 ? (
+                  <h1 key={suggestion["label"]}>{suggestion["label"]}</h1>
+                ) : null}
                 <li key={item} className={className} onClick={onClick}>
                   {item}
                 </li>

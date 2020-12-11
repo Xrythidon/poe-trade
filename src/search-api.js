@@ -24,12 +24,22 @@ async function get(getRequest){
 }
 
 
-async function post(postRequest, query) {
+export async function post(postRequest, query) {
   try {
     const response = await axios.post(postRequest, query);
     return response.data.result;
   } catch (err) {
-    return err;
+    if (err.response) {
+      // client received an error response (5xx, 4xx)
+      console.log(err.response)
+      return err.response.data.error;
+    } else if (err.request) {
+      console.log(err.request)
+      // client never received a response, or request never left
+    } else {
+      // anything else
+      console.log(err, "else")
+    }
   }
 }
 

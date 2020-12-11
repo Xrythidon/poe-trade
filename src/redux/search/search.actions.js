@@ -1,4 +1,6 @@
-import API from "../../search-api";
+import API, {post} from "../../search-api";
+
+
 
 import { SearchActionTypes } from "./search.types";
 
@@ -8,6 +10,12 @@ export const requestingData = () => {
 export const receivedData = (data) => {
   return { type: SearchActionTypes.RECEIVED_DATA, payload: data };
 };
+
+export const receivedError = (errorMessage) => {
+  return { type: SearchActionTypes.RECEIVED_ERROR, payload: errorMessage }
+}
+
+
 
 // ASYNC
 export const grabAPI = (query) => (dispatch, getState) => {
@@ -19,15 +27,18 @@ export const grabAPI = (query) => (dispatch, getState) => {
 
   // CALL THE BACKEND SERVICE HERE
 
-  API.getSearch(query)
-    .then((data) => {
-      dispatch(receivedData(data));
-      const stateAfter = getState()
-      console.log("QUERY IS HERE, AFTER", stateAfter)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  post(`https://www.pathofexile.com/api/trade/search/Standard`, query)
+  .then((data) => {
+    if(data.code > 0){
+      dispatch(receivedError(data.message));
+      return;
+    }
+
+    dispatch(receivedData(data));
+    const stateAfter = getState()
+    console.log("QUERY IS HERE, AFTER", stateAfter)
+  });
+  
 
   // Dispatch received data action here
 };

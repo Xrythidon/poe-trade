@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import Item2 from "../item/item2.component";
@@ -7,23 +7,24 @@ import Pagination from "../pagination/pagination.component";
 import "./items.component.scss";
 
 const Items = () => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const search = useSelector((state) => state.search); // redux name in rootReducer
 
-
   useEffect(() => {}, []);
 
-  let mapArray = [];
+  let itemHolder = [];
   const itemToMap = (array) => {
     if (search.loaded) {
-      mapArray = array.map((searchElement) => (
+      itemHolder = array.map((searchElement) => (
         <Item2 itemId={searchElement} key={searchElement} />
       ));
+    } else {
+      // error occured
+      itemHolder = <h1 className="error-message">{search.errorMessage}</h1>;
     }
 
-    return mapArray;
+    return itemHolder;
   };
 
   // PAGINATION
@@ -59,22 +60,25 @@ const Items = () => {
 
   return (
     <>
-    {search.loaded && (
-      <h1 className="results__title">
-        {" "}
-        Showing {totalresults} Results ({search.currentSearch.length} Matched)
-      </h1>
-    )}
-    <>
-
-      {itemToMap(currentPosts)}
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={search.currentSearch.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
-    </>
+      {search.loaded &&
+        (totalresults === 0 ? (
+          <h1 className="results__title">No Items Found</h1>
+        ) : (
+          <h1 className="results__title">
+            {" "}
+            Showing {totalresults} Results ({search.currentSearch.length}{" "}
+            Matched)
+          </h1>
+        ))}
+      <>
+        {itemToMap(currentPosts)}
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={search.currentSearch.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </>
     </>
   );
 };

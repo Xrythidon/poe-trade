@@ -34,7 +34,12 @@ const Item2 = ({ itemId }) => {
   useEffect(() => {
     // Long Destructure
 
+
     if (fetched) {
+      if(Object.keys(item).length === 0) {
+        return;
+      }
+
       let {
         id, // rename
         item: { icon: image, ilvl: ilvl, name: itemName, explicitMods: explicitMods, corrupted: corrupted, implicitMods: implicitMods, sockets: sockets },
@@ -43,6 +48,7 @@ const Item2 = ({ itemId }) => {
           price: { amount: cost, currency: currencyCost },
         },
       } = item;
+
 
       // Putting the destructured variables back into
       // Item to destructure for render
@@ -158,7 +164,7 @@ const Item2 = ({ itemId }) => {
           </ul>
           <div className="item__sale-box">
             <div className="item__price-box">
-              <p className="item__price">{cost + " " + currencyCost}</p>
+              <p className="item__price">{cost && ( cost + " " + currencyCost)}</p>
               <img
                 src={chaosCurrency}
                 alt=""

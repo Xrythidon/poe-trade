@@ -1,4 +1,0 @@
-export const ItemActionTypes = {
-    REQUESTING_DATA: "REQUESTING_DATA_ITEM",
-    RECEIVED_DATA: "RECEIVED_DATA_ITEM"
-}
