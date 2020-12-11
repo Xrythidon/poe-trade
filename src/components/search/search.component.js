@@ -85,6 +85,7 @@ const Search = ({ className }) => {
     console.log(e.currentTarget.innerText);
     setName(e.currentTarget.innerText);
   };
+  
 
   /*
     const result = [
@@ -100,14 +101,19 @@ const Search = ({ className }) => {
 
   */
 
-  // instead of [0] <- we need to track the current category using state
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
+      console.log(categories);
+      console.log(suggestions[currentCategory], currentCategory, "suggestions")
+
+      console.log(suggestions[currentCategory]["entries"][activeOption]); // <--- Fix this? Undefined?
+
       setShowOptions(false);
       setActiveOption(0);
-      console.log(categories);
-      console.log(suggestions[currentCategory]["entries"][activeOption]);
+      setCurrentCategory(0);
+
       setName(suggestions[currentCategory]["entries"][activeOption]);
+
     } else if (e.keyCode === 38) {
       const lengthOfPreviousCategorySuggestions = suggestions[currentCategory - 1] ? suggestions[currentCategory - 1]["entries"].length : 0;
 
@@ -137,7 +143,6 @@ const Search = ({ className }) => {
       const lastCategory = suggestions[categories.length - 1]["label"];
       console.log(lastCategory, suggestions[currentCategory]["label"],  "lastcategory")
 
-      /* FIX OVERFLOW DOWN KEY, */
 
       if (suggestions[currentCategory]["label"] === lastCategory){
         if (activeOption === lengthOfLastCategorySuggestions - 1) {
@@ -170,6 +175,12 @@ const Search = ({ className }) => {
     }
   };
 
+  const preventEnter = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
+
   /*
             else if (activeOption === lengthOfLastCategorySuggestions) {
           console.log(activeOption, "max category length HIT");
@@ -196,10 +207,14 @@ const Search = ({ className }) => {
         });
         
 
+
         suggestions.push({
           label: type["label"],
           entries: entries,
         });
+        if(entries.length === 0){
+          suggestions.pop();
+        }
 
         // Category handler
         categories.push(type["label"]);
@@ -209,8 +224,9 @@ const Search = ({ className }) => {
 
       });
     }
-    // console.log(suggestions);
+     console.log(suggestions);
     // console.log(categories);
+
     setCategories(categories);
     setSuggestions(suggestions);
   };
