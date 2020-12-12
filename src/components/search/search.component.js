@@ -28,26 +28,10 @@ const Search = ({ className }) => {
 
   const searchQuery = {
     query: {
-      filters: {
-        trade_filters: {
-          disabled: false,
-          filters: {
-            price: {
-              min: 1,
-              max: 100,
-            },
-          },
-        },
-      },
+
       status: {
         option: "online",
       },
-      stats: [
-        {
-          type: "and",
-          filters: [],
-        },
-      ],
       name: name,
     },
     sort: {
@@ -62,6 +46,8 @@ const Search = ({ className }) => {
     dispatch(updateQuery(searchQuery));
     console.log(search, "AFTER SUBMIT");
     dispatch(grabAPI(searchQuery));
+    setName("");
+    setCurrentCategory(0);
   };
 
   const handleError = () => {

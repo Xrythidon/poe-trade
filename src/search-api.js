@@ -18,7 +18,17 @@ async function get(getRequest){
 
     return response.data.result[0]
   } catch (err) {
-    return err;
+    if (err.response) {
+      // client received an error response (5xx, 4xx)
+      console.log(err.response)
+      return err.response.data.error;
+    } else if (err.request) {
+      console.log(err.request)
+      // client never received a response, or request never left
+    } else {
+      // anything else
+      console.log(err, "else")
+    }
   }
 
 }

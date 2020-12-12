@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../search-api";
+import { useSelector, useDispatch } from "react-redux";
+import {receivedError} from "../../redux/search/search.actions"
 
 import chaosCurrency from "../../images/ChaosOrb.png";
 import seperator from "../../images/seperator-unique.png";
@@ -7,6 +9,9 @@ import "./item.component.scss";
 
 
 const Item2 = ({ itemId }) => {
+  const search = useSelector((state) => state.search); // redux name in rootReducer
+  const dispatch = useDispatch();
+
   const [item, setItem] = useState({});
   const [fetched, setFetched] = useState(null);
   const [copySuccess, setCopySuccess] = useState("");
@@ -14,18 +19,21 @@ const Item2 = ({ itemId }) => {
   useEffect(() => {
     let mounted = true;
 
+    // handle error here
     API.getItem(itemId)
       .then((data) => {
+        if(data.code === 3) {
+          dispatch(receivedError(data.message));
+          return;
+        }
+
+        
         if (mounted) {
           setItem(data);
           console.log("THIS IS THE DATA", data);
           setFetched(!fetched);
         }
       })
-      .catch((err) => {
-        console.log(err);
-        setFetched(false);
-      });
 
     return () => (mounted = false);
 
@@ -166,7 +174,7 @@ const Item2 = ({ itemId }) => {
             <div className="item__price-box">
               <p className="item__price">{cost && ( cost + " " + currencyCost)}</p>
               <img
-                src={chaosCurrency}
+                src="pathofexile.com/image/Art/2DItems/Currency/CurrencyRerollRare.png?v=c60aa876dd6bab31174df91b1da1b4f9"
                 alt=""
                 className="currency-icon"
                 width="24px"

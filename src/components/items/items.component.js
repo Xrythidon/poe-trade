@@ -19,13 +19,14 @@ const Items = () => {
       itemHolder = array.map((searchElement) => (
         <Item2 itemId={searchElement} key={searchElement} />
       ));
-    } else {
-      // error occured
-      itemHolder = <h1 className="error-message">{search.errorMessage}</h1>;
     }
 
     return itemHolder;
   };
+
+  const toPaginate = () => {
+    
+  }
 
   // PAGINATION
   const indexOfLastPost = currentPage * postsPerPage;
@@ -59,6 +60,7 @@ const Items = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
+    !search.error ? 
     <>
       {search.loaded &&
         (totalresults === 0 ? (
@@ -79,7 +81,7 @@ const Items = () => {
           currentPage={currentPage}
         />
       </>
-    </>
+    </> :  <h1 className="error-message">{search.errorMessage} =/</h1>
   );
 };
 export default Items;
