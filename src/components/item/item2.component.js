@@ -5,6 +5,7 @@ import {receivedError} from "../../redux/search/search.actions"
 
 import chaosCurrency from "../../images/ChaosOrb.png";
 import seperator from "../../images/seperator-unique.png";
+import {getCurrencyImg} from "./currencyTypes";
 import "./item.component.scss";
 
 
@@ -173,12 +174,12 @@ const Item2 = ({ itemId }) => {
           <div className="item__sale-box">
             <div className="item__price-box">
               <p className="item__price">{cost && ( cost + " " + currencyCost)}</p>
-              <img
-                src="pathofexile.com/image/Art/2DItems/Currency/CurrencyRerollRare.png?v=c60aa876dd6bab31174df91b1da1b4f9"
-                alt=""
-                className="currency-icon"
-                width="24px"
-              />
+             {currencyCost && <img
+              src={getCurrencyImg(currencyCost)}
+              alt=""
+              className="currency-icon"
+              width="24px"
+            />}
             </div>
             <div className="item__status">
               <span className="status__online">Online</span>
