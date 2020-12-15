@@ -1,4 +1,4 @@
-import API, {post} from "../../search-api";
+import API, {post} from "../../API/search-api";
 
 
 

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import API from "../../search-api";
+import API from "../../API/search-api";
 import { useSelector, useDispatch } from "react-redux";
 import {receivedError} from "../../redux/search/search.actions"
-
-import chaosCurrency from "../../images/ChaosOrb.png";
 import seperator from "../../images/seperator-unique.png";
 import {getCurrencyImg} from "./currencyTypes";
 import "./item.component.scss";

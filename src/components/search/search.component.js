@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateQuery, grabAPI } from "../../redux/search/search.actions";
 
-import { stack, result } from "../../AutoComplete";
+import { stack, result } from "../../API/AutoComplete";
 
 import "./search.component.scss";
 
@@ -32,17 +32,26 @@ const Search = ({ className }) => {
       status: {
         option: "online",
       },
-      name: name,
+      name: name
     },
     sort: {
       price: "asc",
     },
   };
 
+  // Helper Function, Deal with label cases
+  // A Helper class with String = Types (enum)
+
+
+
+
   // DISPATCH
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(searchQuery, "QUERY JSON");
+    // before we dispatch, we change the query based on the type of item
+    // make a case statement for each different type
+
     dispatch(updateQuery(searchQuery));
     console.log(search, "AFTER SUBMIT");
     dispatch(grabAPI(searchQuery));

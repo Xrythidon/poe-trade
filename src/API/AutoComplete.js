@@ -1102,6 +1102,7 @@ export const cards = [
   "Wealth and Power",
 ];
 
+// add other key to object pattern, unique = true.
 export const result = [
   {
     label: "Accessories",
