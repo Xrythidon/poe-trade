@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateQuery, grabAPI } from "../../redux/search/search.actions";
-
 import { stack, result } from "../../API/AutoComplete";
+import { handleNameQuery } from "./handleQuery";
 
 import "./search.component.scss";
 
@@ -26,27 +26,17 @@ const Search = ({ className }) => {
   const [activeOption, setActiveOption] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
 
-  const searchQuery = {
-    query: {
-
-      status: {
-        option: "online",
-      },
-      name: name
-    },
-    sort: {
-      price: "asc",
-    },
-  };
-
-  // Helper Function, Deal with label cases
-  // A Helper class with String = Types (enum)
-
-
-
-
   // DISPATCH
   const handleSubmit = (e) => {
+    const currentCategoryName = suggestions[currentCategory]["label"];
+
+    const searchQuery = {
+      query: handleNameQuery(name, currentCategoryName),
+      sort: {
+        price: "asc",
+      },
+    };
+
     e.preventDefault();
     console.log(searchQuery, "QUERY JSON");
     // before we dispatch, we change the query based on the type of item
@@ -59,9 +49,7 @@ const Search = ({ className }) => {
     setCurrentCategory(0);
   };
 
-  const handleError = () => {
-
-  }
+  const handleError = () => {};
 
   // Prevent Enter to Dispatch
   const onKeyPress = (e) => {
@@ -87,14 +75,10 @@ const Search = ({ className }) => {
     setName(e.currentTarget.innerText);
   };
 
-
-
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
       console.log(categories);
       console.log(suggestions[currentCategory], currentCategory, "suggestions");
-
-      console.log(suggestions[currentCategory]["entries"][activeOption]); // <--- Fix this? Undefined?
 
       setName(suggestions[currentCategory]["entries"][activeOption]);
       setShowOptions(false);
@@ -160,8 +144,6 @@ const Search = ({ className }) => {
       console.log(activeOption, "activeOption");
     }
   };
-
-
 
   const searchItemsToComplete = (searchText) => {
     // Get matches to current text input
