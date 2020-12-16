@@ -14,6 +14,9 @@
       case APIQueryTypes.Weapons:
       case APIQueryTypes.Armours:
       case APIQueryTypes.Accessories:
+      case APIQueryTypes.Flasks:
+      case APIQueryTypes.Jewels:
+      case APIQueryTypes.Prophecies:
         return {
           status: {
             option: "online",
@@ -21,13 +24,8 @@
           name: name
         }
       case APIQueryTypes.Currency:
-        return {
-          status: {
-            option: "online",
-          },
-          type: name
-        }
       case APIQueryTypes.Cards:
+      case APIQueryTypes.Gems:
         return {
           status: {
             option: "online",
