@@ -2,10 +2,10 @@ import axios from "axios";
 
 export default {
   getSearch(query = queryFallback, league = "Standard") {
-   return post(`https://www.pathofexile.com/api/trade/search/${league}`, query);
+   return post(`/api/trade/search/${league}`, query);
   },
   getItem(id = "f0e5eb2286b426aa2f9b05a6515f2d0ac87b513bceeb1328ef2f0a63a52ec362") {
-    return get(`https://www.pathofexile.com/api/trade/fetch/${id}`)
+    return get(`/api/trade/fetch/${id}`)
 
   }
 };
