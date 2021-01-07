@@ -199,39 +199,5 @@ export default Item2;
 
 /*
 
-https://www.youtube.com/watch?v=d_BuEAl_CVM
-
-    let {
-        id, // rename
-        item: {
-            icon: image,
-            ilvl: ilvl,
-            name: itemName,
-        },
-        listing: {
-            account: {
-                name: accountName,
-                lastCharacterName: playerName
-            },
-            price: {
-                amount: cost,
-                currency: currencyCost
-
-            }
-        }
-      } = item;
-
-      
-        <div>
-        <div>
-          <h1>Item Name: {itemName}</h1>
-          <img src={image} alt="" />
-          <p>price: {cost + " " + currencyCost}</p>
-          <p>player Name: {playerName}</p>
-        </div>
-      </div>
-
-
-
-
+@testerbot Hi, I would like to buy your Tabula Rasa Simple Robe listed for 10 chaos in Standard (stash tab "Uniques"; position: left 7, top 1)
 */

@@ -244,10 +244,7 @@ const Search = ({ className }) => {
         {/*SubmitButton is in SearchPage */}
         <div className="search__select-box">
           <select className="search__select" name="leagues">
-            <option value="heist">Heist</option>
-            <option value="hardcoreHeist">Hardcore Heist</option>
             <option value="standard">Standard</option>
-            <option value="hardcore">Hardcore</option>
           </select>
           <select className="search__select" name="online">
             <option value="onlineOnly">Online Only</option>
