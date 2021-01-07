@@ -6,6 +6,17 @@
   margin-bottom: 30px;
 }
 
+.search__img {
+  display: none;
+}
+
+@media (min-height: 500px) {
+  .search__img {
+    display: inline;
+  }
+
+}
+
 /* search, input-bar */
 .search__wrapper {
 }
