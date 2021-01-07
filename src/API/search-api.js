@@ -2,10 +2,10 @@ import axios from "axios";
 
 export default {
   getSearch(query = queryFallback, league = "Standard") {
-   return post(`/api/trade/search/${league}`, query);
+   return post(`https://www.pathofexile.com/api/trade/search/${league}`, query);
   },
   getItem(id = "f0e5eb2286b426aa2f9b05a6515f2d0ac87b513bceeb1328ef2f0a63a52ec362") {
-    return get(`/api/trade/fetch/${id}`)
+    return get(`https://www.pathofexile.com/api/trade/fetch/${id}`)
 
   }
 };
@@ -13,7 +13,11 @@ export default {
 
 async function get(getRequest){
   try {
-    const response = await axios.get(getRequest)
+    const response = await axios.get(getRequest, {
+      proxy: {
+        host: "https://poe-trade.netlify.app/"
+      }
+    })
     
 
     return response.data.result[0]
@@ -36,7 +40,11 @@ async function get(getRequest){
 
 export async function post(postRequest, query) {
   try {
-    const response = await axios.post(postRequest, query);
+    const response = await axios.post(postRequest, query, {
+      proxy: {
+        host: "https://poe-trade.netlify.app/"
+      }
+    });
     return response.data.result;
   } catch (err) {
     if (err.response) {
