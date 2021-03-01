@@ -388,6 +388,5 @@ export const getCurrencyImg = (currencyId) => {
     })[0]
 
 
-    console.log(result["image"]);
    return result["image"];
 }

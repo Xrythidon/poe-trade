@@ -1,4 +1,4 @@
-import API, {post} from "../../API/search-api";
+import {post} from "../../API/search-api";
 
 
 
@@ -23,7 +23,6 @@ export const grabAPI = (query) => (dispatch, getState) => {
   dispatch(requestingData());
   
   const stateBefore = getState()
-  console.log("QUERY IS HERE, BEFORE", stateBefore)
 
   // CALL THE BACKEND SERVICE HERE
 
@@ -36,7 +35,6 @@ export const grabAPI = (query) => (dispatch, getState) => {
 
     dispatch(receivedData(data));
     const stateAfter = getState()
-    console.log("QUERY IS HERE, AFTER", stateAfter)
   });
   
 

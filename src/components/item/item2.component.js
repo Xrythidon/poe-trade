@@ -7,10 +7,10 @@ import { getCurrencyImg } from "./currencyTypes";
 import "./item.component.scss";
 
 import ClipboardJS from "clipboard";
-const clipboard = new ClipboardJS(".status__whisper");
+
 
 const Item2 = ({ itemId }) => {
-  const search = useSelector((state) => state.search); // redux name in rootReducer
+  const clipboard = new ClipboardJS(".status__whisper");
   const dispatch = useDispatch();
 
   const [item, setItem] = useState({});
@@ -30,7 +30,6 @@ const Item2 = ({ itemId }) => {
 
       if (mounted) {
         setItem(data);
-        console.log("THIS IS THE DATA", data);
         setFetched(!fetched);
       }
     });
@@ -52,11 +51,11 @@ const Item2 = ({ itemId }) => {
           icon: image,
           ilvl: ilvl,
           name: itemName,
-          explicitMods: explicitMods,
-          corrupted: corrupted,
-          implicitMods: implicitMods,
-          sockets: sockets,
-          league: league,
+          explicitMods,
+          corrupted,
+          implicitMods,
+          sockets,
+          league,
         },
         listing: {
           account: { name: accountName, lastCharacterName: playerName },
